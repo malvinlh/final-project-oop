@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import mecha.alter.GamePanel;
+import mecha.alter.GamePanel.STATE;
 import mecha.alter.KeyHandler;
 
 public class Player extends Entity {
@@ -19,7 +20,16 @@ public class Player extends Entity {
 		this.keyH = keyH;
 		
 		setDefaultValues();
-		getPlayerImage();
+		
+		//Added this
+		if(gp.state == STATE.GAME)
+		{
+			getPlayerImage();
+		}
+		else
+		{
+			//nothing
+		}
 	}
 	
 	public void getPlayerImage() {

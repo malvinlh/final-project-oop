@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import mecha.alter.GamePanel;
+import mecha.alter.GamePanel.STATE;
 
 public class TileManager {
 	GamePanel gp;
@@ -21,7 +22,16 @@ public class TileManager {
 		
 		mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
 		
-		getTileImage();
+		//Added this
+		if(gp.state == STATE.GAME)
+		{
+			getTileImage();
+		}
+		else if(gp.state == STATE.MENU)
+		{
+			//nothing
+		}
+		
 		loadMap();
 	}
 
