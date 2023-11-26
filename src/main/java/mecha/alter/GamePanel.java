@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import mecha.alter.entity.Player;
+import mecha.alter.tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
 	int FPS = 60;
 
 	KeyHandler keyH = new KeyHandler();
+	TileManager tileM = new TileManager(this);
 	Thread gameThread;
 	Player player = new Player(this, keyH);
 
@@ -87,6 +89,8 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
+
+		tileM.draw(g2);
 
 		player.draw(g2);
 
