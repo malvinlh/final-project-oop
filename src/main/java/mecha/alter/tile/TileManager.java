@@ -22,16 +22,7 @@ public class TileManager {
 		
 		mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
 		
-		//Added this
-		if(gp.state == STATE.GAME)
-		{
-			getTileImage();
-		}
-		else if(gp.state == STATE.MENU)
-		{
-			//nothing
-		}
-		
+		getTileImage();
 		loadMap();
 	}
 

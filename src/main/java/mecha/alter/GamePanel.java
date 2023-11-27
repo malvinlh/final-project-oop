@@ -30,14 +30,15 @@ public class GamePanel extends JPanel implements Runnable {
 	TileManager tileM = new TileManager(this);
 	Thread gameThread;
 	Player player = new Player(this, keyH);
+	MainMenu mainMenu = new MainMenu(this);
 	
-	//Added this
-	public enum STATE {
+	public static enum STATE 
+	{
 		GAME,
 		MENU
 	};
-	//Added this
-	public STATE state = STATE.MENU;
+
+	public static STATE state = STATE.MENU;
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -73,13 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 			if (delta >= 1) {
 				update();
-				
-				//Added this
-				if(state == STATE.GAME)
-				{
-					repaint();
-				}
-				
+				repaint();
 				delta--;
 				drawCount++;
 
@@ -95,7 +90,6 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void update() {
-		// Added this
 		if(state == STATE.GAME)
 		{
 			player.update();
@@ -108,16 +102,14 @@ public class GamePanel extends JPanel implements Runnable {
 
 		Graphics2D g2 = (Graphics2D) g;
 		
-		// Added this
 		if(state == STATE.GAME)
 		{
 			tileM.draw(g2);
 			player.draw(g2);
 		}
-		else if (state == STATE.MENU) {
-	        // Fill the background with a pitch-black color
-	        g2.setColor(Color.BLACK);
-	        g2.fillRect(0, 0, screenWidth, screenHeight);
+		else if (state == STATE.MENU) 
+		{
+	        mainMenu.draw(g2);
 	    }
 
 		g2.dispose();

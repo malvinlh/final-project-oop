@@ -20,16 +20,7 @@ public class Player extends Entity {
 		this.keyH = keyH;
 		
 		setDefaultValues();
-		
-		//Added this
-		if(gp.state == STATE.GAME)
-		{
-			getPlayerImage();
-		}
-		else
-		{
-			//nothing
-		}
+		getPlayerImage();
 	}
 	
 	public void getPlayerImage() {
