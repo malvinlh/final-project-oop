@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import mecha.alter.GamePanel;
-import mecha.alter.GamePanel.STATE;
 import mecha.alter.KeyHandler;
 
 public class Player extends Entity {

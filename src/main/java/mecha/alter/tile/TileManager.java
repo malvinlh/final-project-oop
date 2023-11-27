@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import mecha.alter.GamePanel;
-import mecha.alter.GamePanel.STATE;
 
 public class TileManager {
 	GamePanel gp;
