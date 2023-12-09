@@ -32,13 +32,13 @@ public class GamePanel extends JPanel implements Runnable {
 	Player player = new Player(this, keyH);
 	MainMenu mainMenu = new MainMenu(this);
 	
-	public static enum STATE 
+	public static enum GAMESTATE 
 	{
 		GAME,
-		MENU
+		MAINMENU
 	};
 
-	public static STATE state = STATE.MENU;
+	public static GAMESTATE state = GAMESTATE.MAINMENU;
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -90,7 +90,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void update() {
-		if(state == STATE.GAME)
+		if(state == GAMESTATE.GAME)
 		{
 			player.update();
 		}
@@ -102,12 +102,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 		Graphics2D g2 = (Graphics2D) g;
 		
-		if(state == STATE.GAME)
+		if(state == GAMESTATE.GAME)
 		{
 			tileM.draw(g2);
 			player.draw(g2);
 		}
-		else if (state == STATE.MENU) 
+		else if (state == GAMESTATE.MAINMENU) 
 		{
 	        mainMenu.draw(g2);
 	    }
