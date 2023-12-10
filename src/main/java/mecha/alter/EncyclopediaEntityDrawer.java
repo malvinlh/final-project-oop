@@ -24,6 +24,7 @@ public class EncyclopediaEntityDrawer implements MouseListener {
         this.mainMenu = mainMenu;
         this.gifImage = gifImage;
         this.entityBackground = entityBackground;
+        gamePanel.addMouseListener(this);
 
         initializeBackButton();
         initializeThread();
@@ -73,18 +74,33 @@ public class EncyclopediaEntityDrawer implements MouseListener {
         isRunning = false;
     }
 
-    public void drawProfile(Graphics g, int x, int y) {
+    public void drawProfile(Graphics g, int x, int y, int targetWidth, int targetHeight, int xOffset, int yOffset) {
         // Draw the background image
         if (mainMenu != null && mainMenu.getBackgroundImage() != null) {
             g.drawImage(mainMenu.getBackgroundImage(), 0, 0, gamePanel.getWidth(), gamePanel.getHeight(), gamePanel);
         }
 
-        // Draw the animated GIF
-        g.drawImage(gifImage, x, y, null);
+        // Scale the animated GIF
+        if (gifImage != null) {
+            int scaledWidth = targetWidth;
+            int scaledHeight = targetHeight;
 
-        // Draw the entity background text
+            // Calculate the aspect ratio to maintain proportions
+            double aspectRatio = (double) gifImage.getWidth(null) / gifImage.getHeight(null);
+
+            if (aspectRatio > 1) {
+                scaledHeight = (int) (scaledWidth / aspectRatio);
+            } else {
+                scaledWidth = (int) (scaledHeight * aspectRatio);
+            }
+
+            g.drawImage(gifImage, x, y, scaledWidth, scaledHeight, null);
+        }
+
+        // Draw the entity background text using multiline text
         g.setColor(Color.WHITE);
-        g.drawString(entityBackground, x, y + gifImage.getHeight(null) + 20);
+        g.setFont(mainMenu.getImprisha().deriveFont(Font.BOLD, 20));
+        drawMultilineText(g, entityBackground, x + xOffset, y + yOffset, 5);
 
         // Draw the back button
         g.setColor(Color.WHITE);
@@ -92,6 +108,19 @@ public class EncyclopediaEntityDrawer implements MouseListener {
         g.fillRoundRect((int) backButton.x, (int) backButton.y, (int) backButton.width, (int) backButton.height, 10, 10);
         g.setColor(Color.BLACK);
         g.drawString("Back", (int) (backButton.x + 15), (int) (backButton.y + 29));
+    }
+
+
+
+    private void drawMultilineText(Graphics g, String text, int x, int y, int lineSpacing) {
+        String[] lines = text.split("\n");
+        FontMetrics fontMetrics = g.getFontMetrics();
+
+        for (int i = 0; i < lines.length; i++) {
+            int lineHeight = fontMetrics.getHeight() + lineSpacing;
+            int lineY = y + i * lineHeight;
+            g.drawString(lines[i], x, lineY);
+        }
     }
 
     @Override
@@ -103,10 +132,8 @@ public class EncyclopediaEntityDrawer implements MouseListener {
             System.out.println("Mouse press inside Back Button");
             stopAnimation();
             MainMenuEncyclopedia.encState = MainMenuEncyclopedia.ENCYCLOPEDIASTATE.BASE; // Go back to the base state
-            MainMenu.mmState = MainMenu.MAINMENUSTATE.ENCYCLOPEDIA;
         }
     }
-
 
     @Override
     public void mousePressed(MouseEvent e) {

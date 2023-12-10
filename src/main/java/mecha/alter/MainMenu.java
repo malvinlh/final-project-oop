@@ -165,6 +165,11 @@ public class MainMenu implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e) 
 	{
+	    if (mmState != MAINMENUSTATE.MAINMENU) {
+	        // If the state is in Encyclopedia, return without processing the mouse event
+	        return;
+	    }
+	    
 		int mx = e.getX();
 		int my = e.getY();
 		
