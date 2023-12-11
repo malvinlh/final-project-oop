@@ -59,43 +59,55 @@ public class MainMenuEncyclopedia implements MouseListener {
         }
 
         // Initialize background text and GIF file names for each entity
-        entityBackgrounds.add("Ahool dikatakan berbentuk seperti kelelawar dan dideskripsikan\r\n"
-        		+ "sebagai ukuran anak berumur satu tahun dengan rentang sayap raksasa\r\n"
-        		+ "kira-kira 12 kaki. Ahool juga dideskripsikan berbulu pendek, abu-abu gelap,\r\n"
-        		+ "memiliki mata hitam yang besar, lengan pendukung yang rata, sayap dengan\r\n"
-        		+ "muka yang rata. Satu laporan mengenai Ahool terjadi pada 1925 ketika naturalis\r\n"
-        		+ "Dr. Ernest Bartels, ahli ilmu burung mencatat Bartels tengah menjajaki air\r\n"
-        		+ "terjun di lereng Pegunungan Salak ketika kelelawar raksasa tidak dikenal,\r\n"
-        		+ "Ahool, terbang tepat di atas kepalanya. Dua tahun kemudian pada tahun 1927,\r\n"
-        		+ "sekitar pukul 11.30 WIB, Dr. Ernest Bartels ditemui Ahool lagi, kali ini dia\r\n"
-        		+ "berbaring di tempat tidur, di dalam rumah jerami dekat ke Sungai Tjidjenkol\r\n"
-        		+ "di Jawa Barat. Ia tiba-tiba mendengar suara yang datang langsung dari\r\n"
+        entityBackgrounds.add("Ahool dikatakan berbentuk seperti kelelawar dan dideskripsikan\n"
+        		+ "sebagai ukuran anak berumur satu tahun dengan rentang sayap raksasa\n"
+        		+ "kira-kira 12 kaki. Ahool juga dideskripsikan berbulu pendek, abu-abu gelap,\n"
+        		+ "memiliki mata hitam yang besar, lengan pendukung yang rata, sayap dengan\n"
+        		+ "muka yang rata. Satu laporan mengenai Ahool terjadi pada 1925 ketika naturalis\n"
+        		+ "Dr. Ernest Bartels, ahli ilmu burung mencatat Bartels tengah menjajaki air\n"
+        		+ "terjun di lereng Pegunungan Salak ketika kelelawar raksasa tidak dikenal,\n"
+        		+ "Ahool, terbang tepat di atas kepalanya. Dua tahun kemudian pada tahun 1927,\n"
+        		+ "sekitar pukul 11.30 WIB, Dr. Ernest Bartels ditemui Ahool lagi, kali ini dia\n"
+        		+ "berbaring di tempat tidur, di dalam rumah jerami dekat ke Sungai Tjidjenkol\n"
+        		+ "di Jawa Barat. Ia tiba-tiba mendengar suara yang datang langsung dari\n"
         		+ "di atas gubuknya, seperti menangis keras dan jelas tampak mengucapkan A Hool!");
-        entityBackgrounds.add("Banaspati merupakan legenda atau cerita di masyarakat mengenai sosok makhluk\r\n"
-        		+ "halus yang menjadi bagian dari budaya Indonesia. Sosok Banaspati sering kali\r\n"
-        		+ "ditemukan dalam arsitektur candi di pulau Jawa. Mengutip dari jurnal Universitas\r\n"
-        		+ "Udayana, pada candi di daerah Jawa Timur, sosok Banaspati atau yang disebut sebagai\r\n"
-        		+ "Kala di Jawa Tengah, umumnya dapat ditemukan terpahat pada bagian atas lubang\r\n"
-        		+ "pintu masuk di ruang sucinya masing-masing. Sementara itu, dikutip dari repository\r\n"
-        		+ "Universitas Katolik Soegijapranata (Unika) Semarang, dalam kepercayaan masyarakat,\r\n"
-        		+ "Banaspati dikenal sebagai hantu yang mempunyai elemen api. Banaspati dikenal\r\n"
-        		+ "sebagai makhluk mistis yang memiliki kekuatan besar dan biasa ditemukan di dalam\r\n"
+        entityBackgrounds.add("Banaspati merupakan legenda atau cerita di masyarakat mengenai sosok makhluk\n"
+        		+ "halus yang menjadi bagian dari budaya Indonesia. Sosok Banaspati sering kali\n"
+        		+ "ditemukan dalam arsitektur candi di pulau Jawa. Mengutip dari jurnal Universitas\n"
+        		+ "Udayana, pada candi di daerah Jawa Timur, sosok Banaspati atau yang disebut sebagai\n"
+        		+ "Kala di Jawa Tengah, umumnya dapat ditemukan terpahat pada bagian atas lubang\n"
+        		+ "pintu masuk di ruang sucinya masing-masing. Sementara itu, dikutip dari repository\n"
+        		+ "Universitas Katolik Soegijapranata (Unika) Semarang, dalam kepercayaan masyarakat,\n"
+        		+ "Banaspati dikenal sebagai hantu yang mempunyai elemen api. Banaspati dikenal\n"
+        		+ "sebagai makhluk mistis yang memiliki kekuatan besar dan biasa ditemukan di dalam\n"
         		+ "hutan ataupun digunakan oleh dukun sebagai sarana ilmu hitam.");
-        entityBackgrounds.add("Gajah Mada adalah seorang panglima perang dan tokoh yang sangat\r\n"
-        		+ "berpengaruh pada zaman kerajaan Majapahit. Menurut berbagai sumber mitologi,\r\n"
-        		+ "kitab, dan prasasti dari zaman Jawa Kuno, ia memulai kariernya tahun 1313, dan\r\n"
-        		+ "semakin menanjak setelah peristiwa pemberontakan Ra Kuti pada masa\r\n"
-        		+ "pemerintahan Sri Jayanagara, yang mengangkatnya sebagai Patih. Ia menjadi\r\n"
-        		+ "Mahapatih (Menteri Besar) pada masa Ratu Tribhuwanatunggadewi, dan\r\n"
-        		+ "kemudian sebagai Amangkubhumi (Perdana Menteri) yang mengantarkan\r\n"
-        		+ "Majapahit ke puncak kejayaannya. Gajah Mada terkenal dengan sumpahnya\r\n"
-        		+ "yaitu Sumpah Palapa, yang tercatat di dalam Kitab Pararaton. Sumpah Gajah\r\n"
-        		+ "Mada adalah inspirasi dan ”bukti” bahwa bangsa ini dapat bersatu, meskipun\r\n"
-        		+ "meliputi wilayah yang luas dan budaya yang berbeda-beda. Dengan demikian,\r\n"
-        		+ "Gajah Mada adalah inspirasi bagi revolusi nasional Indonesia dan rasa persatuan\r\n"
-        		+ "se-nusantara. Saat ini, Indonesia telah menetapkan Gajah Mada sebagai salah satu\r\n"
+        entityBackgrounds.add("Gajah Mada adalah seorang panglima perang dan tokoh yang sangat\n"
+        		+ "berpengaruh pada zaman kerajaan Majapahit. Menurut berbagai sumber mitologi,\n"
+        		+ "kitab, dan prasasti dari zaman Jawa Kuno, ia memulai kariernya tahun 1313, dan\n"
+        		+ "semakin menanjak setelah peristiwa pemberontakan Ra Kuti pada masa\n"
+        		+ "pemerintahan Sri Jayanagara, yang mengangkatnya sebagai Patih. Ia menjadi\n"
+        		+ "Mahapatih (Menteri Besar) pada masa Ratu Tribhuwanatunggadewi, dan\n"
+        		+ "kemudian sebagai Amangkubhumi (Perdana Menteri) yang mengantarkan\n"
+        		+ "Majapahit ke puncak kejayaannya. Gajah Mada terkenal dengan sumpahnya\n"
+        		+ "yaitu Sumpah Palapa, yang tercatat di dalam Kitab Pararaton. Sumpah Gajah\n"
+        		+ "Mada adalah inspirasi dan ”bukti” bahwa bangsa ini dapat bersatu, meskipun\n"
+        		+ "meliputi wilayah yang luas dan budaya yang berbeda-beda. Dengan demikian,\n"
+        		+ "Gajah Mada adalah inspirasi bagi revolusi nasional Indonesia dan rasa persatuan\n"
+        		+ "se-nusantara. Saat ini, Indonesia telah menetapkan Gajah Mada sebagai salah satu\n"
         		+ "Pahlawan Nasional dan merupakan simbol nasionalisme dan persatuan Nusantara.");
-        entityBackgrounds.add("Background text for Jerangkong...");
+        entityBackgrounds.add("Jerangkong merupakan salah satu hantu yang berasal dari tanah Jawa. Masyarakat\n"
+        		+ "Jawa percaya kalau jerangkong adalah arwah orang yang sudah meninggal saat dia\n"
+        		+ "masih hidup suka mencuri telur. Hingga mati pun ia akan tetap mencuri telur. dan telur\n"
+        		+ "siapapun bisa diambil. Namun tidak ada cerita jelas mengapa hantu jerangkong bisa\n"
+        		+ "gentayangan. Hantu jerangkong digambarkan sebagai hantu yang berbentuk tengkorak,\n"
+        		+ "tanpa ada kulit ataupun daging. Tidak ada penjelasan pasti mengapa hantu jerangkong\n"
+        		+ "bisa berwujud tulang belulang saja tanpa adanya daging dan kulit. Pencurian yang\n"
+        		+ "dilakukan oleh hantu jerangkong bukan seperti tuyul yang mencuri uang dengan membawa\n"
+        		+ "pergi uangnya. Hantu jerangkong yang sudah mencuri telur tersebut akan memakan telurnya\n"
+        		+ "di tempat. hantu jerangkong pun memakan telur tersebut bukan dengan cara memecahkan\n"
+        		+ "telur, namun dia hanya akan memakan isinya tanpa memecahkan telurnya. Sehingga ketika\n"
+        		+ "kalian mendapati telur yang kalian miliki di rumah tidak memiliki isinya, bisa jadi telur\n"
+        		+ "kalian sudah dimakan oleh hantu jerangkong.\n");
 
         for (String fileName : gifFileNames) {
             entityGifFileNames.add(fileName); // Add each GIF file name to the list
@@ -160,7 +172,7 @@ public class MainMenuEncyclopedia implements MouseListener {
                 break;
             case BANASPATI:
                 // Customize layout for BANASPATI
-                profileDrawers.get(1).drawProfile(g, -75, 150, 600, 600, 500, 150);
+                profileDrawers.get(1).drawProfile(g, 60, 280, 300, 300, 350, 35);
                 break;
             case GAJAHMADA:
                 // Customize layout for GAJAHMADA
@@ -168,7 +180,7 @@ public class MainMenuEncyclopedia implements MouseListener {
                 break;
             case JERANGKONG:
                 // Customize layout for JERANGKONG
-                profileDrawers.get(3).drawProfile(g, 300, 200, 250, 150, 50, 80);
+                profileDrawers.get(3).drawProfile(g, 110, 200, 550, 450, 272, 75);
                 break;
             default:
                 // Draw a default profile or nothing
