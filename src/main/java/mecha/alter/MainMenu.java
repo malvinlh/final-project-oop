@@ -17,8 +17,9 @@ import javax.imageio.ImageIO;
 
 public class MainMenu implements MouseListener
 {
-    private GamePanel gp;
+    private GamePanel gamePanel;
     private MainMenuEncyclopedia mmEn;
+    private MainMenuCredits mmCr;
     Font imprisha, maruMonica;
     private BufferedImage backgroundImage;
     public RoundRectangle2D.Double storyModeButton, optionButton, encyclopediaButton, creditsButton;
@@ -34,11 +35,12 @@ public class MainMenu implements MouseListener
     
     public static MAINMENUSTATE mmState = MAINMENUSTATE.MAINMENU;
 
-    public MainMenu(GamePanel gp) 
+    public MainMenu(GamePanel gamePanel) 
     {
-        this.gp = gp;
-        gp.addMouseListener(this);
-        mmEn = new MainMenuEncyclopedia(gp, this); // Create an instance of MainMenuEncyclopedia
+        this.gamePanel = gamePanel;
+        gamePanel.addMouseListener(this);
+        mmEn = new MainMenuEncyclopedia(gamePanel, this);
+        mmCr = new MainMenuCredits(gamePanel, this);
         storyModeButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
         optionButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
         encyclopediaButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
@@ -92,12 +94,12 @@ public class MainMenu implements MouseListener
 	        // Draw the background image
 	        if (backgroundImage != null) 
 	        {
-	            g.drawImage(backgroundImage, 0, 0, gp.getWidth(), gp.getHeight(), gp);
+	            g.drawImage(backgroundImage, 0, 0, gamePanel.getWidth(), gamePanel.getHeight(), gamePanel);
 	        } 
 	        else 
 	        {
 	            g.setColor(Color.BLACK);
-	            g.fillRect(0, 0, gp.getWidth(), gp.getHeight());
+	            g.fillRect(0, 0, gamePanel.getWidth(), gamePanel.getHeight());
 	        }
 	
 	        g.setFont(imprisha.deriveFont(Font.BOLD, 100));
@@ -106,8 +108,8 @@ public class MainMenu implements MouseListener
 	        int titleWidth = g.getFontMetrics().stringWidth("ALTER");
 	        int titleHeight = g.getFontMetrics().getHeight();
 	
-	        int xTitle = (gp.getWidth() - titleWidth) / 2;
-	        int yTitle = (gp.getHeight() - titleHeight) / 8 + g.getFontMetrics().getAscent(); // Adjusted the division factor
+	        int xTitle = (gamePanel.getWidth() - titleWidth) / 2;
+	        int yTitle = (gamePanel.getHeight() - titleHeight) / 8 + g.getFontMetrics().getAscent(); // Adjusted the division factor
 	
 	        g.drawString("ALTER", xTitle, yTitle);
 	        
@@ -153,6 +155,10 @@ public class MainMenu implements MouseListener
     	{
     		mmEn.draw(g);
     	}
+    	else if(mmState == MAINMENUSTATE.CREDITS)
+    	{
+    		mmCr.draw(g);
+    	}
     }
 
 	@Override
@@ -194,7 +200,10 @@ public class MainMenu implements MouseListener
 		else if (creditsButton.contains(mx, my)) 
 		{
 		    System.out.println("Mouse press inside Credits Button");
-		    // ... rest of the code
+		    if(mmState == MAINMENUSTATE.MAINMENU)
+		    {
+		    	mmState = MAINMENUSTATE.CREDITS;
+		    }
 		}		
 	}
 

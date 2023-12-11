@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 
 public class MainMenuEncyclopedia implements MouseListener {
 
-    private GamePanel gp;
+    private GamePanel gamePanel;
     private MainMenu mainMenu;
     private RoundRectangle2D.Double backButton;
     private List<String> entityNames;
@@ -34,11 +34,11 @@ public class MainMenuEncyclopedia implements MouseListener {
 
     public static ENCYCLOPEDIASTATE encState = ENCYCLOPEDIASTATE.BASE;
 
-    public MainMenuEncyclopedia(GamePanel gp, MainMenu mainMenu) {
-        this.gp = gp;
+    public MainMenuEncyclopedia(GamePanel gamePanel, MainMenu mainMenu) {
+        this.gamePanel = gamePanel;
         this.mainMenu = mainMenu;
 
-        gp.addMouseListener(this);
+        gamePanel.addMouseListener(this);
         backButton = new RoundRectangle2D.Double(25, 25, 100, 40, 10, 10);
 
         entityNames = new ArrayList<>();
@@ -116,7 +116,7 @@ public class MainMenuEncyclopedia implements MouseListener {
         profileDrawers = new ArrayList<>();
         for (int i = 0; i < entityBackgrounds.size(); i++) {
             Image entityGif = loadEntityGif(entityGifFileNames.get(i));
-            profileDrawers.add(new EncyclopediaEntityDrawer(gp, mainMenu, entityGif, entityBackgrounds.get(i)));
+            profileDrawers.add(new EncyclopediaEntityDrawer(gamePanel, mainMenu, entityGif, entityBackgrounds.get(i)));
         }
     }
 
@@ -131,7 +131,7 @@ public class MainMenuEncyclopedia implements MouseListener {
     }
 
     private int calculateTextWidth(String text, Font font) {
-        FontMetrics fontMetrics = gp.getFontMetrics(font);
+        FontMetrics fontMetrics = gamePanel.getFontMetrics(font);
         return fontMetrics.stringWidth(text);
     }
 
@@ -139,10 +139,10 @@ public class MainMenuEncyclopedia implements MouseListener {
         if (encState == ENCYCLOPEDIASTATE.BASE) {
             // Draw the background image
             if (mainMenu.getBackgroundImage() != null) {
-                g.drawImage(mainMenu.getBackgroundImage(), 0, 0, gp.getWidth(), gp.getHeight(), gp);
+                g.drawImage(mainMenu.getBackgroundImage(), 0, 0, gamePanel.getWidth(), gamePanel.getHeight(), gamePanel);
             } else {
                 g.setColor(Color.BLACK);
-                g.fillRect(0, 0, gp.getWidth(), gp.getHeight());
+                g.fillRect(0, 0, gamePanel.getWidth(), gamePanel.getHeight());
             }
 
             // Draw entities as a clickable list

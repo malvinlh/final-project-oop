@@ -11,11 +11,11 @@ import mecha.alter.KeyHandler;
 
 public class Player extends Entity {
 
-	GamePanel gp;
+	GamePanel gamePanel;
 	KeyHandler keyH;
 
-	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+	public Player(GamePanel gamePanel, KeyHandler keyH) {
+		this.gamePanel = gamePanel;
 		this.keyH = keyH;
 		
 		setDefaultValues();
@@ -116,6 +116,6 @@ public class Player extends Entity {
 			break;
 		}
 		
-		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
 	}
 }

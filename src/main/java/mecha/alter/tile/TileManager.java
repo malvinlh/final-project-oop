@@ -11,15 +11,15 @@ import javax.imageio.ImageIO;
 import mecha.alter.GamePanel;
 
 public class TileManager {
-	GamePanel gp;
+	GamePanel gamePanel;
 	Tile[] tile;
 	int mapTileNum[][];
 	
-	public TileManager(GamePanel gp) {
-		this.gp = gp;
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
 		tile = new Tile[10];
 		
-		mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+		mapTileNum = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
 		
 		getTileImage();
 		loadMap();
@@ -53,17 +53,17 @@ public class TileManager {
 			int col = 0;
 			int row = 0;
 			
-			while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
+			while(col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow) {
 				String line = br.readLine();
 				
-				while(col < gp.maxScreenCol) {
+				while(col < gamePanel.maxScreenCol) {
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
 					
 					mapTileNum[col][row]= num;
 					col++;
 				}
-				if(col == gp.maxScreenCol) {
+				if(col == gamePanel.maxScreenCol) {
 					col = 0;
 					row++;
 				}
@@ -75,25 +75,25 @@ public class TileManager {
 	}
 	
 	public void draw(Graphics2D g2) {
-		//g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
+		//g2.drawImage(tile[0].image, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
 		
 		int col = 0;
 		int row = 0;
 		int x = 0;
 		int y = 0;
 		
-		while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
+		while(col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow) {
 			
 			int tileNum = mapTileNum[col][row];
-			g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(tile[tileNum].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
 			col++;
-			x += gp.tileSize;
+			x += gamePanel.tileSize;
 			
-			if(col == gp.maxScreenCol) {
+			if(col == gamePanel.maxScreenCol) {
 				col = 0;
 				x = 0;
 				row++;
-				y += gp.tileSize;
+				y += gamePanel.tileSize;
 			}
 		}
 	}
