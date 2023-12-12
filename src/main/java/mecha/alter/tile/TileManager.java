@@ -15,7 +15,7 @@ public class TileManager
 
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = TileLoader.loadTiles();
+		tile = TileLoader.loadTiles(gp);
 
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
@@ -50,31 +50,8 @@ public class TileManager
 
 		}
 	}
-	// dumb
-	/*
-	 * public void loadMap() { try { InputStream is =
-	 * getClass().getResourceAsStream("/maps/worldmap.csv"); BufferedReader br = new
-	 * BufferedReader(new InputStreamReader(is));
-	 * 
-	 * int col = 0; int row = 0;
-	 * 
-	 * String line; while ((line = br.readLine()) != null && row < gp.maxScreenRow)
-	 * { String[] numbers = line.split(","); col = 0; // Reset col for each row
-	 * 
-	 * for (String number : numbers) { int num = Integer.parseInt(number.trim());
-	 * mapTileNum[col][row] = num; col++;
-	 * 
-	 * if (col >= gp.maxScreenCol) { break; // Break if we have reached the maximum
-	 * number of columns } }
-	 * 
-	 * row++; }
-	 * 
-	 * br.close(); } catch (Exception e) { e.printStackTrace(); // Handle exceptions
-	 * more gracefully in your actual application } }
-	 */
 
 	public void draw(Graphics2D g2) {
-		// g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
 
 		int worldCol = 0;
 		int worldRow = 0;
@@ -92,7 +69,7 @@ public class TileManager
 					&& worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
 					&& worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
 					&& worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 			}
 
 			worldCol++;

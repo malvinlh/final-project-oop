@@ -10,20 +10,19 @@ import javax.swing.JPanel;
 import mecha.alter.entity.Player;
 import mecha.alter.tile.TileManager;
 
-public class GamePanel extends JPanel implements Runnable 
-{
+public class GamePanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 2968997093426263095L;
-	
+
 	// Display setting
-	final int originalTileSize = 16;
-	final int scale = 5;
+	final int originalTileSize = 32;
+	final int scale = 2;
 	public final int tileSize = originalTileSize * scale;
-	public final int maxScreenCol = 20;
-	public final int maxScreenRow = 12;
-	public final int screenWidth = tileSize * maxScreenCol; // 1280px
+	public final int maxScreenCol = 25;
+	public final int maxScreenRow = 15;
+	public final int screenWidth = tileSize * maxScreenCol; // 1600px
 	public final int screenHeight = tileSize * maxScreenRow; // 960px
-	
+
 	// World settings
 	public final int maxWorldCol = 50;
 	public final int maxWorldRow = 50;
@@ -41,10 +40,9 @@ public class GamePanel extends JPanel implements Runnable
 	public CollisionDetection colDectection = new CollisionDetection(this);
 	public Player player = new Player(this, keyH);
 	MainMenu mainMenu = new MainMenu(this);
-	
+
 	public static enum GAMESTATE {
-		GAME,
-		MAINMENU
+		GAME, MAINMENU
 	};
 
 	public static GAMESTATE state = GAMESTATE.MAINMENU;
@@ -98,30 +96,42 @@ public class GamePanel extends JPanel implements Runnable
 
 	}
 
-	public void update() 
-	{
-		if(state == GAMESTATE.GAME)
-		{
+	public void update() {
+		if (state == GAMESTATE.GAME) {
 			player.update();
 		}
 
 	}
 
-	public void paintComponent(Graphics g) 
-	{
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
-		
-		if(state == GAMESTATE.GAME)
-		{
+
+		if (state == GAMESTATE.GAME) {
+
+			// debug
+			long drawStart = 0;
+			drawStart = System.nanoTime();
+
+			if (keyH.drawTimeInfo) {
+				drawStart = System.nanoTime();
+			}
+
 			tileM.draw(g2);
 			player.draw(g2);
+
+			if (keyH.drawTimeInfo) {
+				long drawEnd = System.nanoTime();
+				long passed = drawEnd - drawStart;
+				g2.setColor(Color.WHITE);
+				g2.drawString("draw time: " + passed, 10, 400);
+				System.out.println("draw time: " + passed);
+			}
+
+		} else if (state == GAMESTATE.MAINMENU) {
+			mainMenu.draw(g2);
 		}
-		else if (state == GAMESTATE.MAINMENU) 
-		{
-	        mainMenu.draw(g2);
-	    }
 
 		g2.dispose();
 	}
