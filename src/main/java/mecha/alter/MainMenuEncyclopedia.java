@@ -65,12 +65,12 @@ public class MainMenuEncyclopedia implements MouseListener
         entityBackgrounds.add("Ahool dikatakan berbentuk seperti kelelawar dan dideskripsikan\n"
         		+ "sebagai ukuran anak berumur satu tahun dengan rentang sayap raksasa\n"
         		+ "kira-kira 12 kaki. Ahool juga dideskripsikan berbulu pendek, abu-abu gelap,\n"
-        		+ "memiliki mata hitam yang besar, lengan pendukung yang rata, sayap dengan\n"
+        		+ "memiliki mata hitam yang besar, lengan pendukung yang rata, dan sayap dengan\n"
         		+ "muka yang rata. Satu laporan mengenai Ahool terjadi pada 1925 ketika naturalis\n"
-        		+ "Dr. Ernest Bartels, ahli ilmu burung mencatat Bartels tengah menjajaki air\n"
+        		+ "Dr. Ernest Bartels, ahli ilmu burung, mencatat bahwa ia tengah menjajaki air\n"
         		+ "terjun di lereng Pegunungan Salak ketika kelelawar raksasa tidak dikenal,\n"
         		+ "Ahool, terbang tepat di atas kepalanya. Dua tahun kemudian pada tahun 1927,\n"
-        		+ "sekitar pukul 11.30 WIB, Dr. Ernest Bartels ditemui Ahool lagi, kali ini dia\n"
+        		+ "sekitar pukul 11.30 WIB, Dr. Ernest Bartels ditemui Ahool lagi. Kali ini dia\n"
         		+ "berbaring di tempat tidur, di dalam rumah jerami dekat ke Sungai Tjidjenkol\n"
         		+ "di Jawa Barat. Ia tiba-tiba mendengar suara yang datang langsung dari\n"
         		+ "atas gubuknya, seperti menangis keras dan jelas tampak mengucapkan A Hool!");
@@ -79,7 +79,7 @@ public class MainMenuEncyclopedia implements MouseListener
         		+ "ditemukan dalam arsitektur candi di pulau Jawa. Mengutip dari jurnal Universitas\n"
         		+ "Udayana, pada candi di daerah Jawa Timur, sosok Banaspati atau yang disebut sebagai\n"
         		+ "Kala di Jawa Tengah, umumnya dapat ditemukan terpahat pada bagian atas lubang\n"
-        		+ "pintu masuk di ruang sucinya masing-masing. Sementara itu, dikutip dari repository\n"
+        		+ "pintu masuk di ruang sucinya masing-masing. Sementara itu, dikutip dari repositori\n"
         		+ "Universitas Katolik Soegijapranata (Unika) Semarang, dalam kepercayaan masyarakat,\n"
         		+ "Banaspati dikenal sebagai hantu yang mempunyai elemen api. Banaspati dikenal\n"
         		+ "sebagai makhluk mistis yang memiliki kekuatan besar dan biasa ditemukan di dalam\n"
@@ -91,7 +91,7 @@ public class MainMenuEncyclopedia implements MouseListener
         		+ "pemerintahan Sri Jayanagara, yang mengangkatnya sebagai Patih. Ia menjadi\n"
         		+ "Mahapatih (Menteri Besar) pada masa Ratu Tribhuwanatunggadewi, dan\n"
         		+ "kemudian sebagai Amangkubhumi (Perdana Menteri) yang mengantarkan\n"
-        		+ "Majapahit ke puncak kejayaannya. Gajah Mada terkenal dengan sumpahnya\n"
+        		+ "Majapahit ke puncak kejayaannya. Gajah Mada terkenal dengan sumpahnya,\n"
         		+ "yaitu Sumpah Palapa, yang tercatat di dalam Kitab Pararaton. Sumpah Gajah\n"
         		+ "Mada adalah inspirasi dan ”bukti” bahwa bangsa ini dapat bersatu, meskipun\n"
         		+ "meliputi wilayah yang luas dan budaya yang berbeda-beda. Dengan demikian,\n"
@@ -99,18 +99,16 @@ public class MainMenuEncyclopedia implements MouseListener
         		+ "se-nusantara. Saat ini, Indonesia telah menetapkan Gajah Mada sebagai salah satu\n"
         		+ "Pahlawan Nasional dan merupakan simbol nasionalisme dan persatuan Nusantara.");
         entityBackgrounds.add("Jerangkong merupakan salah satu hantu yang berasal dari tanah Jawa. Masyarakat\n"
-        		+ "Jawa percaya kalau jerangkong adalah arwah orang yang sudah meninggal saat dia\n"
-        		+ "masih hidup suka mencuri telur. Hingga mati pun ia akan tetap mencuri telur. dan telur\n"
-        		+ "siapapun bisa diambil. Namun tidak ada cerita jelas mengapa hantu jerangkong bisa\n"
+        		+ "Jawa percaya kalau jerangkong adalah arwah orang yang sudah meninggal yang saat\n"
+        		+ "hidup suka mencuri telur. Hingga mati pun, ia akan tetap mencuri telur, dan telur\n"
+        		+ "siapapun bisa diambil. Namun, tidak ada cerita jelas mengapa hantu jerangkong bisa\n"
         		+ "gentayangan. Hantu jerangkong digambarkan sebagai hantu yang berbentuk tengkorak,\n"
         		+ "tanpa ada kulit ataupun daging. Tidak ada penjelasan pasti mengapa hantu jerangkong\n"
         		+ "bisa berwujud tulang belulang saja tanpa adanya daging dan kulit. Pencurian yang\n"
         		+ "dilakukan oleh hantu jerangkong bukan seperti tuyul yang mencuri uang dengan membawa\n"
-        		+ "pergi uangnya. Hantu jerangkong yang sudah mencuri telur tersebut akan memakan telurnya\n"
-        		+ "di tempat. hantu jerangkong pun memakan telur tersebut bukan dengan cara memecahkan\n"
-        		+ "telur, namun dia hanya akan memakan isinya tanpa memecahkan telurnya. Sehingga ketika\n"
-        		+ "kalian mendapati telur yang kalian miliki di rumah tidak memiliki isinya, bisa jadi telur\n"
-        		+ "kalian sudah dimakan oleh hantu jerangkong.\n");
+        		+ "pergi uangnya. Hantu jerangkong yang sudah mencuri telur akan memakan telur tersebut\n"
+        		+ "di tempat. Hantu jerangkong memakan telur tersebut bukan dengan cara memecahkannya,\n"
+        		+ "tetapi dia hanya akan memakan isinya tanpa memecahkan telurnya.\n");
 
         for (String fileName : gifFileNames) 
         {
@@ -195,7 +193,7 @@ public class MainMenuEncyclopedia implements MouseListener
                 profileDrawers.get(2).drawProfile(g, 225, 160, 650, 550, 395, 90);
                 break;
             case JERANGKONG:
-                profileDrawers.get(3).drawProfile(g, 250, 200, 550, 450, 330, 75);
+                profileDrawers.get(3).drawProfile(g, 250, 200, 550, 450, 330, 98);
                 break;
             default:
                 break;
