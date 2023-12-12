@@ -187,7 +187,7 @@ public class MainMenu implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-	    if (mmState != MAINMENUSTATE.MAINMENU) 
+	    if (mmState != MAINMENUSTATE.MAINMENU || GamePanel.state != GamePanel.GAMESTATE.MAINMENU) 
 	    {
 	        return;
 	    }
