@@ -143,7 +143,7 @@ public class MainMenu implements MouseListener
 	        FontMetrics fontMetricsEncyclopedia = g.getFontMetrics(fontEncyclopedia);
 	        int encyclopediaTextWidth = fontMetricsEncyclopedia.stringWidth("Encyclopedia");
 	        int encyclopediaTextHeight = fontMetricsEncyclopedia.getHeight();
-	        g2d.drawString("Encyclopedia", (int) (xTitle + 19 + (encyclopediaButton.width - encyclopediaTextWidth) / 2), (int) (optionButton.y + 25 + optionButton.height + buttonSpacing + encyclopediaTextHeight / 2));
+	        g2d.drawString("Encyclopedia", (int) (xTitle + 21 + (encyclopediaButton.width - encyclopediaTextWidth) / 2), (int) (optionButton.y + 25 + optionButton.height + buttonSpacing + encyclopediaTextHeight / 2));
 	        encyclopediaButton.setFrame(xTitle + 20, optionButton.y + optionButton.height + buttonSpacing, encyclopediaButton.width, encyclopediaButton.height);
 	        g2d.draw(encyclopediaButton);
 	
