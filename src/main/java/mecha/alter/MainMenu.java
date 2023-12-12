@@ -17,13 +17,15 @@ import javax.imageio.ImageIO;
 
 public class MainMenu implements MouseListener
 {
+	private GameManager gameManager;
     private GamePanel gamePanel;
     private MainMenuEncyclopedia mmEn;
     private MainMenuCredits mmCr;
-    Font imprisha, maruMonica;
     private BufferedImage backgroundImage;
     public RoundRectangle2D.Double storyModeButton, optionButton, encyclopediaButton, creditsButton;
     private int buttonSpacing = 40;
+    
+    Font imprisha;
     
     public static enum MAINMENUSTATE
     {
@@ -41,6 +43,7 @@ public class MainMenu implements MouseListener
         gamePanel.addMouseListener(this);
         mmEn = new MainMenuEncyclopedia(gamePanel, this);
         mmCr = new MainMenuCredits(gamePanel, this);
+        gameManager = new GameManager(gamePanel, this);
         storyModeButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
         optionButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
         encyclopediaButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
@@ -49,18 +52,19 @@ public class MainMenu implements MouseListener
         // Load the background image
         try 
         {
-        	InputStream maruMon = getClass().getResourceAsStream("/fonts/x12y16pxMaruMonica.ttf");
-        	maruMonica = Font.createFont(Font.TRUETYPE_FONT, maruMon);
             backgroundImage = ImageIO.read(getClass().getResourceAsStream("/mainmenu/bg2.png"));
         } 
-        catch (FontFormatException e)
-        {
-        	e.printStackTrace();
-        }
         catch (IOException e) 
         {
             e.printStackTrace();
         }
+        
+        sceneSetup();
+    }
+    
+    public void sceneSetup()
+    {
+    	playMusic(0);
     }
     
     public BufferedImage getBackgroundImage() 
@@ -70,18 +74,19 @@ public class MainMenu implements MouseListener
     
     public Font getImprisha()
     {
-        if (imprisha == null) {
-            // Load the Imprisha font if it hasn't been loaded yet.
-            try {
+        if (imprisha == null) 
+        {
+            try 
+            {
                 InputStream imp = getClass().getResourceAsStream("/fonts/IMPRISHA.TTF");
                 imprisha = Font.createFont(Font.TRUETYPE_FONT, imp);
-            } catch (FontFormatException | IOException e) {
+            } 
+            catch (FontFormatException | IOException e) 
+            {
                 e.printStackTrace();
-                // Handle the exception as needed (e.g., log the error, use a default font, etc.).
             }
         }
 
-        // Return the Imprisha font or a default font if loading failed.
         return imprisha;
     }
 
@@ -109,7 +114,7 @@ public class MainMenu implements MouseListener
 	        int titleHeight = g.getFontMetrics().getHeight();
 	
 	        int xTitle = (gamePanel.getWidth() - titleWidth) / 2;
-	        int yTitle = (gamePanel.getHeight() - titleHeight) / 8 + g.getFontMetrics().getAscent(); // Adjusted the division factor
+	        int yTitle = (gamePanel.getHeight() - titleHeight) / 8 + g.getFontMetrics().getAscent();
 	
 	        g.drawString("ALTER", xTitle, yTitle);
 	        
@@ -160,19 +165,30 @@ public class MainMenu implements MouseListener
     		mmCr.draw(g);
     	}
     }
+    
+    public void playMusic(int i) 
+    {
+        gameManager.setSounds(i, true);
+        gameManager.playSounds();
+    }
+    
+    public void playSE(int i) 
+    {
+        gameManager.setSounds(i, false);
+        gameManager.playSounds();
+    }
+
+    public void stopMusic() 
+    {
+        System.out.println("Stop Music");
+        gameManager.stopMusic();
+    }
 
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) 
-	{
-	    if (mmState != MAINMENUSTATE.MAINMENU) {
-	        // If the state is in Encyclopedia, return without processing the mouse event
+	    if (mmState != MAINMENUSTATE.MAINMENU) 
+	    {
 	        return;
 	    }
 	    
@@ -181,30 +197,34 @@ public class MainMenu implements MouseListener
 		
 		if (storyModeButton.contains(mx, my)) 
 		{
-		    System.out.println("Mouse press inside Story Mode Button");
+		    System.out.println("Mouse click inside Story Mode Button");
+		    playSE(1);
+		    stopMusic();
 		    GamePanel.state = GamePanel.GAMESTATE.GAME;
 		} 
 		else if (optionButton.contains(mx, my)) 
 		{
-		    System.out.println("Mouse press inside Option Button");
-
+			playSE(1);
+		    System.out.println("Mouse click inside Option Button");
 		} 
 		else if (encyclopediaButton.contains(mx, my)) 
 		{
-		    System.out.println("Mouse press inside Encyclopedia Button");
-		    if(mmState == MAINMENUSTATE.MAINMENU)
-		    {
-		    	mmState = MAINMENUSTATE.ENCYCLOPEDIA;
-		    }		
+			playSE(1);
+		    System.out.println("Mouse click inside Encyclopedia Button");
+		    mmState = MAINMENUSTATE.ENCYCLOPEDIA;
 		} 
 		else if (creditsButton.contains(mx, my)) 
 		{
-		    System.out.println("Mouse press inside Credits Button");
-		    if(mmState == MAINMENUSTATE.MAINMENU)
-		    {
-		    	mmState = MAINMENUSTATE.CREDITS;
-		    }
-		}		
+			playSE(1);
+		    System.out.println("Mouse click inside Credits Button");
+		    mmState = MAINMENUSTATE.CREDITS;
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) 
+	{
+		
 	}
 
 	@Override

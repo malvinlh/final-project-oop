@@ -24,9 +24,12 @@ public class MainMenuCredits implements MouseListener
 	  
 	  public void draw(Graphics g)
 	  {
-		  if (mainMenu.getBackgroundImage() != null) {
+		  if (mainMenu.getBackgroundImage() != null) 
+		  {
               g.drawImage(mainMenu.getBackgroundImage(), 0, 0, gamePanel.getWidth(), gamePanel.getHeight(), gamePanel);
-          } else {
+          } 
+		  else 
+		  {
               g.setColor(Color.BLACK);
               g.fillRect(0, 0, gamePanel.getWidth(), gamePanel.getHeight());
           }
@@ -56,7 +59,7 @@ public class MainMenuCredits implements MouseListener
 	      g.setColor(Color.WHITE);
 	
 	      // String to be centered
-	      String text3 = "Special Thanks To:";
+	      String text3 = "Special thanks to:";
 	
 	      // Calculate x-coordinate for centering
 	      int x3 = (1280 - g.getFontMetrics(font20).stringWidth(text3)) / 2;
@@ -64,7 +67,8 @@ public class MainMenuCredits implements MouseListener
 	      // Draw the centered string
 	      g.drawString(text3, x3, 225);
 
-
+	      
+	      // Draw a back button
 	      g.setFont(font30);
 	      g.fillRoundRect((int) backButton.x, (int) backButton.y, (int) backButton.width, (int) backButton.height, 10, 10);
           g.setColor(Color.BLACK);
@@ -74,10 +78,18 @@ public class MainMenuCredits implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{   
+		if(MainMenu.mmState != MainMenu.MAINMENUSTATE.CREDITS)
+		{
+			return;
+		}
+		
         int mx = e.getX();
         int my = e.getY();
 
-        if (backButton.contains(mx, my)) {
+        if (backButton.contains(mx, my)) 
+        {
+        	mainMenu.playSE(1);
+        	System.out.println("Mouse click inside Credits Back Button");
             MainMenu.mmState = MainMenu.MAINMENUSTATE.MAINMENU;
         }		
 	}

@@ -1,6 +1,5 @@
 package mecha.alter;
 
-import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -10,7 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 
-public class EncyclopediaEntityDrawer implements MouseListener {
+public class EncyclopediaEntityDrawer implements MouseListener 
+{
     private GamePanel gamePanel;
     private MainMenu mainMenu;
     private Image gifImage;
@@ -19,7 +19,8 @@ public class EncyclopediaEntityDrawer implements MouseListener {
     private Thread gifThread;
     private volatile boolean isRunning = false;
 
-    public EncyclopediaEntityDrawer(GamePanel gamePanel, MainMenu mainMenu, Image gifImage, String entityBackground) {
+    public EncyclopediaEntityDrawer(GamePanel gamePanel, MainMenu mainMenu, Image gifImage, String entityBackground) 
+    {
         this.gamePanel = gamePanel;
         this.mainMenu = mainMenu;
         this.gifImage = gifImage;
@@ -30,32 +31,40 @@ public class EncyclopediaEntityDrawer implements MouseListener {
         initializeThread();
     }
 
-    private void initializeBackButton() {
+    private void initializeBackButton() 
+    {
         backButton = new RoundRectangle2D.Double(25, 25, 100, 40, 10, 10);
     }
 
-    private void initializeThread() {
-        gifThread = new Thread(new Runnable() {
+    private void initializeThread() 
+    {
+        gifThread = new Thread(new Runnable() 
+        {
             @Override
-            public void run() {
+            public void run() 
+            {
                 isRunning = true;
 
                 long targetTime = 1000 / 60; // 60 FPS
 
-                while (isRunning) {
+                while (isRunning) 
+                {
                     long startTime = System.currentTimeMillis();
 
-                    // Repaint the panel using the background image from mainMenu
-                    if (gamePanel != null && mainMenu != null && mainMenu.getBackgroundImage() != null) {
+                    if (gamePanel != null && mainMenu != null && mainMenu.getBackgroundImage() != null) 
+                    {
                         gamePanel.repaint();
                     }
 
                     long elapsedTime = System.currentTimeMillis() - startTime;
                     long sleepTime = Math.max(0, targetTime - elapsedTime);
 
-                    try {
+                    try 
+                    {
                         Thread.sleep(sleepTime);
-                    } catch (InterruptedException e) {
+                    } 
+                    catch (InterruptedException e) 
+                    {
                         e.printStackTrace();
                     }
                 }
@@ -63,34 +72,43 @@ public class EncyclopediaEntityDrawer implements MouseListener {
         });
     }
 
-    public void startAnimation() {
-        if (!gifThread.isAlive()) {
+    public void startAnimation() 
+    {
+        if (!gifThread.isAlive()) 
+        {
             initializeThread();
             gifThread.start();
         }
     }
 
-    public void stopAnimation() {
+    public void stopAnimation() 
+    {
         isRunning = false;
     }
 
-    public void drawProfile(Graphics g, int x, int y, int targetWidth, int targetHeight, int xOffset, int yOffset) {
+    public void drawProfile(Graphics g, int x, int y, int targetWidth, int targetHeight, int xOffset, int yOffset) 
+    {
         // Draw the background image
-        if (mainMenu != null && mainMenu.getBackgroundImage() != null) {
+        if (mainMenu != null && mainMenu.getBackgroundImage() != null) 
+        {
             g.drawImage(mainMenu.getBackgroundImage(), 0, 0, gamePanel.getWidth(), gamePanel.getHeight(), gamePanel);
         }
 
         // Scale the animated GIF
-        if (gifImage != null) {
+        if (gifImage != null) 
+        {
             int scaledWidth = targetWidth;
             int scaledHeight = targetHeight;
 
             // Calculate the aspect ratio to maintain proportions
             double aspectRatio = (double) gifImage.getWidth(null) / gifImage.getHeight(null);
 
-            if (aspectRatio > 1) {
+            if (aspectRatio > 1) 
+            {
                 scaledHeight = (int) (scaledWidth / aspectRatio);
-            } else {
+            } 
+            else 
+            {
                 scaledWidth = (int) (scaledHeight * aspectRatio);
             }
 
@@ -112,11 +130,13 @@ public class EncyclopediaEntityDrawer implements MouseListener {
 
 
 
-    private void drawMultilineText(Graphics g, String text, int x, int y, int lineSpacing) {
+    private void drawMultilineText(Graphics g, String text, int x, int y, int lineSpacing) 
+    {
         String[] lines = text.split("\n");
         FontMetrics fontMetrics = g.getFontMetrics();
 
-        for (int i = 0; i < lines.length; i++) {
+        for (int i = 0; i < lines.length; i++) 
+        {
             int lineHeight = fontMetrics.getHeight() + lineSpacing;
             int lineY = y + i * lineHeight;
             g.drawString(lines[i], x, lineY);
@@ -124,14 +144,22 @@ public class EncyclopediaEntityDrawer implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) 
+    {
+    	if(MainMenu.mmState != MainMenu.MAINMENUSTATE.ENCYCLOPEDIA || MainMenuEncyclopedia.encState == MainMenuEncyclopedia.ENCYCLOPEDIASTATE.BASE)
+    	{
+    		return;
+    	}
+    	
         int mx = e.getX();
         int my = e.getY();
 
-        if (backButton.contains(mx, my)) {
-            System.out.println("Mouse press inside Back Button");
+        if (backButton.contains(mx, my)) 
+        {
+        	mainMenu.playSE(1);
+            System.out.println("Mouse click inside Encylopedia Entity Drawer Back Button");
             stopAnimation();
-            MainMenuEncyclopedia.encState = MainMenuEncyclopedia.ENCYCLOPEDIASTATE.BASE; // Go back to the base state
+            MainMenuEncyclopedia.encState = MainMenuEncyclopedia.ENCYCLOPEDIASTATE.BASE;
         }
     }
 
