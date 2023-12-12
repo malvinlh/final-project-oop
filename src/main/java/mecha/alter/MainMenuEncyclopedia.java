@@ -13,7 +13,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-public class MainMenuEncyclopedia implements MouseListener {
+public class MainMenuEncyclopedia implements MouseListener 
+{
 
     private GamePanel gamePanel;
     private MainMenu mainMenu;
@@ -22,7 +23,7 @@ public class MainMenuEncyclopedia implements MouseListener {
     private List<RoundRectangle2D.Double> boundingBoxes;
     private List<EncyclopediaEntityDrawer> profileDrawers;
     private List<String> entityBackgrounds;
-    private List<String> entityGifFileNames; // Add this list for storing GIF file names
+    private List<String> entityGifFileNames;
 
     public static enum ENCYCLOPEDIASTATE {
         BASE,
@@ -34,7 +35,8 @@ public class MainMenuEncyclopedia implements MouseListener {
 
     public static ENCYCLOPEDIASTATE encState = ENCYCLOPEDIASTATE.BASE;
 
-    public MainMenuEncyclopedia(GamePanel gamePanel, MainMenu mainMenu) {
+    public MainMenuEncyclopedia(GamePanel gamePanel, MainMenu mainMenu) 
+    {
         this.gamePanel = gamePanel;
         this.mainMenu = mainMenu;
 
@@ -44,14 +46,15 @@ public class MainMenuEncyclopedia implements MouseListener {
         entityNames = new ArrayList<>();
         boundingBoxes = new ArrayList<>();
         entityBackgrounds = new ArrayList<>();
-        entityGifFileNames = new ArrayList<>(); // Initialize the list
+        entityGifFileNames = new ArrayList<>();
 
         int y = 125;
 
         String[] names = {"Ahool", "Banaspati", "Gajah Mada", "Jerangkong"};
         String[] gifFileNames = {"ahool_idle.gif", "banaspati_idle.gif", "gajah_mada_idle.gif", "jerangkong_idle.gif"};
 
-        for (String name : names) {
+        for (String name : names) 
+        {
             entityNames.add(name);
             int textWidth = calculateTextWidth(name, mainMenu.getImprisha().deriveFont(Font.BOLD, 30));
             boundingBoxes.add(new RoundRectangle2D.Double(100, y, textWidth + 20, 40, 10, 10));
@@ -109,38 +112,50 @@ public class MainMenuEncyclopedia implements MouseListener {
         		+ "kalian mendapati telur yang kalian miliki di rumah tidak memiliki isinya, bisa jadi telur\n"
         		+ "kalian sudah dimakan oleh hantu jerangkong.\n");
 
-        for (String fileName : gifFileNames) {
+        for (String fileName : gifFileNames) 
+        {
             entityGifFileNames.add(fileName); // Add each GIF file name to the list
         }
 
         profileDrawers = new ArrayList<>();
-        for (int i = 0; i < entityBackgrounds.size(); i++) {
+        for (int i = 0; i < entityBackgrounds.size(); i++) 
+        {
             Image entityGif = loadEntityGif(entityGifFileNames.get(i));
             profileDrawers.add(new EncyclopediaEntityDrawer(gamePanel, mainMenu, entityGif, entityBackgrounds.get(i)));
         }
     }
 
-    private Image loadEntityGif(String fileName) {
-        try {
+    private Image loadEntityGif(String fileName) 
+    {
+        try 
+        {
             ImageIcon icon = new ImageIcon(getClass().getResource("/entities/" + fileName));
             return icon.getImage();
-        } catch (Exception e) {
+        }
+        catch (Exception e) 
+        {
             e.printStackTrace();
             return null;
         }
     }
 
-    private int calculateTextWidth(String text, Font font) {
+    private int calculateTextWidth(String text, Font font) 
+    {
         FontMetrics fontMetrics = gamePanel.getFontMetrics(font);
         return fontMetrics.stringWidth(text);
     }
 
-    public void draw(Graphics g) {
-        if (encState == ENCYCLOPEDIASTATE.BASE) {
+    public void draw(Graphics g) 
+    {
+        if (encState == ENCYCLOPEDIASTATE.BASE) 
+        {
             // Draw the background image
-            if (mainMenu.getBackgroundImage() != null) {
+            if (mainMenu.getBackgroundImage() != null) 
+            {
                 g.drawImage(mainMenu.getBackgroundImage(), 0, 0, gamePanel.getWidth(), gamePanel.getHeight(), gamePanel);
-            } else {
+            } 
+            else 
+            {
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, gamePanel.getWidth(), gamePanel.getHeight());
             }
@@ -149,7 +164,8 @@ public class MainMenuEncyclopedia implements MouseListener {
             g.setFont(mainMenu.getImprisha().deriveFont(Font.BOLD, 30));
             g.setColor(Color.WHITE);
 
-            for (int i = 0; i < entityNames.size(); i++) {
+            for (int i = 0; i < entityNames.size(); i++) 
+            {
                 g.drawString(entityNames.get(i), (int) boundingBoxes.get(i).x, (int) boundingBoxes.get(i).y + 30);
             }
 
@@ -158,66 +174,81 @@ public class MainMenuEncyclopedia implements MouseListener {
             g.fillRoundRect((int) backButton.x, (int) backButton.y, (int) backButton.width, (int) backButton.height, 10, 10);
             g.setColor(Color.BLACK);
             g.drawString("Back", (int) (backButton.x + 15), (int) (backButton.y + 29));
-        } else {
-            // Draw entity profiles based on the current state
+        } 
+        else
+        {
             drawEntityProfiles(g);
         }
     }
 
-    private void drawEntityProfiles(Graphics g) {
-        switch (encState) {
+    private void drawEntityProfiles(Graphics g) 
+    {
+        switch (encState) 
+        {
             case AHOOL:
-                // Customize layout for AHOOL
                 profileDrawers.get(0).drawProfile(g, 65, 250, 390, 290, 430, 20);
                 break;
             case BANASPATI:
-                // Customize layout for BANASPATI
                 profileDrawers.get(1).drawProfile(g, 60, 280, 300, 300, 350, 35);
                 break;
             case GAJAHMADA:
-                // Customize layout for GAJAHMADA
                 profileDrawers.get(2).drawProfile(g, 110, 160, 650, 550, 360, 90);
                 break;
             case JERANGKONG:
-                // Customize layout for JERANGKONG
                 profileDrawers.get(3).drawProfile(g, 110, 200, 550, 450, 272, 75);
                 break;
             default:
-                // Draw a default profile or nothing
                 break;
         }
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        if (encState != ENCYCLOPEDIASTATE.BASE) {
+    public void mouseClicked(MouseEvent e) 
+    {
+        if (MainMenu.mmState != MainMenu.MAINMENUSTATE.ENCYCLOPEDIA || encState != ENCYCLOPEDIASTATE.BASE) 
+        {
             return;
         }
+        
         int mx = e.getX();
         int my = e.getY();
 
-        if (backButton.contains(mx, my)) {
-            System.out.println("Mouse press inside Back Button");
+        if (backButton.contains(mx, my)) 
+        {
+        	mainMenu.playSE(1);
+            System.out.println("Mouse click inside Encyclopedia Back Button");
             encState = ENCYCLOPEDIASTATE.BASE;
             MainMenu.mmState = MainMenu.MAINMENUSTATE.MAINMENU;
-        } else {
-            for (int i = 0; i < boundingBoxes.size(); i++) {
-                if (boundingBoxes.get(i).contains(mx, my)) {
-                    switch (i) {
+        } 
+        else 
+        {
+            for (int i = 0; i < boundingBoxes.size(); i++) 
+            {
+                if (boundingBoxes.get(i).contains(mx, my)) 
+                {
+                    switch (i) 
+                    {
                         case 0:
+                        	System.out.println("Mouse click inside Entity Ahool");
+                        	mainMenu.playSE(1);
                             encState = ENCYCLOPEDIASTATE.AHOOL;
                             break;
                         case 1:
+                        	System.out.println("Mouse click inside Entity Banaspati");
+                        	mainMenu.playSE(1);
                             encState = ENCYCLOPEDIASTATE.BANASPATI;
                             break;
                         case 2:
+                        	System.out.println("Mouse click inside Entity Gajah Mada");
+                        	mainMenu.playSE(1);
                             encState = ENCYCLOPEDIASTATE.GAJAHMADA;
                             break;
                         case 3:
+                        	System.out.println("Mouse click inside Entity Jerangkong");
+                        	mainMenu.playSE(1);
                             encState = ENCYCLOPEDIASTATE.JERANGKONG;
                             break;
                         default:
-                            encState = ENCYCLOPEDIASTATE.BASE;
                             break;
                     }
                 }
