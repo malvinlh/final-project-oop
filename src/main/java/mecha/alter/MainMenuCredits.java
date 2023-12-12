@@ -47,8 +47,8 @@ public class MainMenuCredits implements MouseListener
 	      String text2 = "Surya Fadli Alamsyah (5025221059)";
 	
 	      // Calculate x-coordinate for centering
-	      int x1 = (1280 - g.getFontMetrics(font30).stringWidth(text1)) / 2;
-	      int x2 = (1280 - g.getFontMetrics(font30).stringWidth(text2)) / 2;
+	      int x1 = (1525 - g.getFontMetrics(font30).stringWidth(text1)) / 2;
+	      int x2 = (1525 - g.getFontMetrics(font30).stringWidth(text2)) / 2;
 	
 	      // Draw the centered strings
 	      g.drawString(text1, x1, 100);
@@ -62,7 +62,7 @@ public class MainMenuCredits implements MouseListener
 	      String text3 = "Special thanks to:";
 	
 	      // Calculate x-coordinate for centering
-	      int x3 = (1280 - g.getFontMetrics(font20).stringWidth(text3)) / 2;
+	      int x3 = (1525 - g.getFontMetrics(font20).stringWidth(text3)) / 2;
 	
 	      // Draw the centered string
 	      g.drawString(text3, x3, 225);

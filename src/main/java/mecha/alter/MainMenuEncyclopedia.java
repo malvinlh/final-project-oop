@@ -73,7 +73,7 @@ public class MainMenuEncyclopedia implements MouseListener
         		+ "sekitar pukul 11.30 WIB, Dr. Ernest Bartels ditemui Ahool lagi, kali ini dia\n"
         		+ "berbaring di tempat tidur, di dalam rumah jerami dekat ke Sungai Tjidjenkol\n"
         		+ "di Jawa Barat. Ia tiba-tiba mendengar suara yang datang langsung dari\n"
-        		+ "di atas gubuknya, seperti menangis keras dan jelas tampak mengucapkan A Hool!");
+        		+ "atas gubuknya, seperti menangis keras dan jelas tampak mengucapkan A Hool!");
         entityBackgrounds.add("Banaspati merupakan legenda atau cerita di masyarakat mengenai sosok makhluk\n"
         		+ "halus yang menjadi bagian dari budaya Indonesia. Sosok Banaspati sering kali\n"
         		+ "ditemukan dalam arsitektur candi di pulau Jawa. Mengutip dari jurnal Universitas\n"
@@ -186,16 +186,16 @@ public class MainMenuEncyclopedia implements MouseListener
         switch (encState) 
         {
             case AHOOL:
-                profileDrawers.get(0).drawProfile(g, 65, 250, 390, 290, 430, 20);
+                profileDrawers.get(0).drawProfile(g, 90, 210, 500, 400, 580, 65);
                 break;
             case BANASPATI:
-                profileDrawers.get(1).drawProfile(g, 60, 280, 300, 300, 350, 35);
+                profileDrawers.get(1).drawProfile(g, 120, 230, 400, 400, 470, 75);
                 break;
             case GAJAHMADA:
-                profileDrawers.get(2).drawProfile(g, 110, 160, 650, 550, 360, 90);
+                profileDrawers.get(2).drawProfile(g, 225, 160, 650, 550, 395, 90);
                 break;
             case JERANGKONG:
-                profileDrawers.get(3).drawProfile(g, 110, 200, 550, 450, 272, 75);
+                profileDrawers.get(3).drawProfile(g, 250, 200, 550, 450, 330, 75);
                 break;
             default:
                 break;

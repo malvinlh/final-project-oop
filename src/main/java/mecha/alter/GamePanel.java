@@ -14,34 +14,42 @@ public class GamePanel extends JPanel implements Runnable
 {
 
 	private static final long serialVersionUID = 2968997093426263095L;
+	
+	// Display setting
 	final int originalTileSize = 16;
 	final int scale = 5;
-
 	public final int tileSize = originalTileSize * scale;
-	public final int maxScreenCol = 16;
+	public final int maxScreenCol = 20;
 	public final int maxScreenRow = 12;
 	public final int screenWidth = tileSize * maxScreenCol; // 1280px
 	public final int screenHeight = tileSize * maxScreenRow; // 960px
+	
+	// World settings
+	public final int maxWorldCol = 50;
+	public final int maxWorldRow = 50;
+	public final int worldWidth = tileSize * maxWorldCol;
+	public final int worldHeight = tileSize * maxWorldRow;
 
 	// FPS
+
 	int FPS = 60;
 
 	KeyHandler keyH = new KeyHandler();
 	TileManager tileM = new TileManager(this);
+	public UI ui = new UI(this);
 	Thread gameThread;
-	Player player = new Player(this, keyH);
+	public CollisionDetection colDectection = new CollisionDetection(this);
+	public Player player = new Player(this, keyH);
 	MainMenu mainMenu = new MainMenu(this);
 	
-	public static enum GAMESTATE 
-	{
+	public static enum GAMESTATE {
 		GAME,
 		MAINMENU
 	};
 
 	public static GAMESTATE state = GAMESTATE.MAINMENU;
 
-	public GamePanel() 
-	{
+	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.BLACK);
 		this.setDoubleBuffered(true);
@@ -49,15 +57,13 @@ public class GamePanel extends JPanel implements Runnable
 		this.setFocusable(true);
 	}
 
-	public void startGameThread() 
-	{
+	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
 	@Override
-	public void run() 
-	{
+	public void run() {
 
 		double drawInterval = 1000000000 / FPS;
 		double delta = 0;
@@ -66,8 +72,7 @@ public class GamePanel extends JPanel implements Runnable
 		long timer = 0;
 		int drawCount = 0;
 
-		while (gameThread != null) 
-		{
+		while (gameThread != null) {
 
 			currentTime = System.nanoTime();
 
@@ -76,8 +81,7 @@ public class GamePanel extends JPanel implements Runnable
 
 			lastTime = currentTime;
 
-			if (delta >= 1) 
-			{
+			if (delta >= 1) {
 				update();
 				repaint();
 				delta--;
@@ -85,13 +89,13 @@ public class GamePanel extends JPanel implements Runnable
 
 			}
 
-			if (timer >= 1000000000) 
-			{
+			if (timer >= 1000000000) {
 				System.out.println("FPS: " + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
 		}
+
 	}
 
 	public void update() 

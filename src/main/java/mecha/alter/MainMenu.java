@@ -52,7 +52,7 @@ public class MainMenu implements MouseListener
         // Load the background image
         try 
         {
-            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/mainmenu/bg2.png"));
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/mainmenu/main_menu_background.png"));
         } 
         catch (IOException e) 
         {
