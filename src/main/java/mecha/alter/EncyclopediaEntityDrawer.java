@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 
+import javax.swing.JLabel;
+
 public class EncyclopediaEntityDrawer implements MouseListener 
 {
     private GamePanel gamePanel;
@@ -115,10 +117,14 @@ public class EncyclopediaEntityDrawer implements MouseListener
             g.drawImage(gifImage, x, y, scaledWidth, scaledHeight, null);
         }
 
-        // Draw the entity background text using multiline text
-        g.setColor(Color.WHITE);
-        g.setFont(mainMenu.getImprisha().deriveFont(Font.BOLD, 20));
-        drawMultilineText(g, entityBackground, x + xOffset, y + yOffset, 5);
+        // Create a JLabel for displaying justified HTML text
+        JLabel htmlLabel = new JLabel("<html><div style='text-align: justify; margin-left: 490px'>" + entityBackground + "</div></html>");
+        htmlLabel.setBounds(x + xOffset, y + yOffset, xOffset, yOffset);
+        htmlLabel.setForeground(Color.WHITE);
+        htmlLabel.setFont(mainMenu.getImprisha().deriveFont(Font.BOLD, 20));
+
+        // Draw the JLabel
+        htmlLabel.print(g);
 
         // Draw the back button
         g.setColor(Color.WHITE);
@@ -127,7 +133,6 @@ public class EncyclopediaEntityDrawer implements MouseListener
         g.setColor(Color.BLACK);
         g.drawString("Back", (int) (backButton.x + 15), (int) (backButton.y + 29));
     }
-
 
 
     private void drawMultilineText(Graphics g, String text, int x, int y, int lineSpacing) 
