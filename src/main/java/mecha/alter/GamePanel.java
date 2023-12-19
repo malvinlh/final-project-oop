@@ -4,29 +4,32 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
 
+import mecha.alter.entity.Entity;
 import mecha.alter.entity.Player;
 import mecha.alter.tile.TileManager;
 
-public class GamePanel extends JPanel implements Runnable 
-{
+public class GamePanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 2968997093426263095L;
-	
+
 	// Display setting
-	final int originalTileSize = 16;
-	final int scale = 5;
+	final int originalTileSize = 32;
+	final int scale = 2;
 	public final int tileSize = originalTileSize * scale;
-	public final int maxScreenCol = 20;
-	public final int maxScreenRow = 12;
-	public final int screenWidth = tileSize * maxScreenCol; // 1280px
+	public final int maxScreenCol = 25;
+	public final int maxScreenRow = 15;
+	public final int screenWidth = tileSize * maxScreenCol; // 1600px
 	public final int screenHeight = tileSize * maxScreenRow; // 960px
-	
+
 	// World settings
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public int maxWorldCol = 50;
+	public int maxWorldRow = 50;
 	public final int worldWidth = tileSize * maxWorldCol;
 	public final int worldHeight = tileSize * maxWorldRow;
 
@@ -34,17 +37,21 @@ public class GamePanel extends JPanel implements Runnable
 
 	int FPS = 60;
 
-	KeyHandler keyH = new KeyHandler();
 	TileManager tileM = new TileManager(this);
+	KeyHandler keyH = new KeyHandler(this);
+	public CollisionDetection colDetection = new CollisionDetection(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	Thread gameThread;
-	public CollisionDetection colDectection = new CollisionDetection(this);
 	public Player player = new Player(this, keyH);
 	MainMenu mainMenu = new MainMenu(this);
-	
+	SoundManager gManager = new SoundManager();
+	public Entity monster[] = new Entity[20];
+	ArrayList<Entity> entityList = new ArrayList<>();
+	BattleScene battleScene = new BattleScene(this, mainMenu);
+
 	public static enum GAMESTATE {
-		GAME,
-		MAINMENU
+		GAME, MAINMENU, PAUSED, BATTLE
 	};
 
 	public static GAMESTATE state = GAMESTATE.MAINMENU;
@@ -55,6 +62,10 @@ public class GamePanel extends JPanel implements Runnable
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+	}
+
+	public void setupGame() {
+		aSetter.setMonsters();
 	}
 
 	public void startGameThread() {
@@ -98,30 +109,83 @@ public class GamePanel extends JPanel implements Runnable
 
 	}
 
-	public void update() 
-	{
-		if(state == GAMESTATE.GAME)
-		{
+	public void update() {
+		if (state == GAMESTATE.GAME) {
+			if (!gManager.isMusicPlaying()) {
+				gManager.setSounds(2, true);
+				gManager.playSounds();
+			}
 			player.update();
+
+			for (int i = 0; i < monster.length; i++) {
+				if (monster[i] != null) {
+					monster[i].update();
+				}
+			}
+		}
+		if (state == GAMESTATE.PAUSED) {
+
 		}
 
 	}
 
-	public void paintComponent(Graphics g) 
-	{
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
-		
-		if(state == GAMESTATE.GAME)
-		{
+
+		if (state == GAMESTATE.GAME || state == GAMESTATE.PAUSED) {
+
+			// debug
+			long drawStart = 0;
+			drawStart = System.nanoTime();
+
+			if (keyH.drawTimeInfo) {
+				drawStart = System.nanoTime();
+			}
+
 			tileM.draw(g2);
-			player.draw(g2);
+			entityList.add(player);
+
+			for (int i = 0; i < monster.length; i++) {
+				if (monster[i] != null) {
+					entityList.add(monster[i]);
+				}
+			}
+
+			Collections.sort(entityList, new Comparator<Entity>() {
+				public int compare(Entity e1, Entity e2) {
+					int result = Integer.compare(e1.worldY, e2.worldY);
+					return result;
+				}
+			});
+
+			for (int i = 0; i < entityList.size(); i++) {
+				entityList.get(i).draw(g2);
+			}
+
+			for (int i = 0; i < entityList.size(); i++) {
+				entityList.remove(i);
+			}
+
+			ui.draw(g2);
+
+			if (keyH.drawTimeInfo) {
+				long drawEnd = System.nanoTime();
+				long passed = drawEnd - drawStart;
+				g2.setColor(Color.WHITE);
+				g2.drawString("draw time: " + passed, 10, 400);
+				System.out.println("draw time: " + passed);
+			}
+		}
+		else if(state == GAMESTATE.BATTLE)
+		{
+			battleScene.draw(g2);
 		}
 		else if (state == GAMESTATE.MAINMENU) 
 		{
-	        mainMenu.draw(g2);
-	    }
+			mainMenu.draw(g2);
+		}
 
 		g2.dispose();
 	}

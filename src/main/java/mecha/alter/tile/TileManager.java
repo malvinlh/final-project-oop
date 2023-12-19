@@ -4,22 +4,89 @@ import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import mecha.alter.GamePanel;
+import mecha.alter.UtilityTools;
 
 public class TileManager 
 {
 	GamePanel gp;
 	public Tile[] tile;
 	public int mapTileNum[][];
+	ArrayList<String> fileNames = new ArrayList<>();
+	ArrayList<String> collisionStatus = new ArrayList<>();
 
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = TileLoader.loadTiles();
 
-		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+		InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-		loadMap("/maps/world02.txt");
+		String line;
+
+		try {
+			while ((line = br.readLine()) != null) {
+				fileNames.add(line);
+				collisionStatus.add(br.readLine());
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		tile = new Tile[fileNames.size()];
+		getTileImage();
+
+		is = getClass().getResourceAsStream("/maps/volcanoMap.txt");
+		br = new BufferedReader(new InputStreamReader(is));
+
+		try {
+			String line2 = br.readLine();
+			String maxTile[] = line2.split(" ");
+			gp.maxWorldCol = maxTile.length;
+			gp.maxWorldRow = maxTile.length;
+			mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		loadMap("/maps/volcanoMap.txt");
+	}
+
+	public void setup(int index, String imageName, boolean collision) {
+		UtilityTools uTool = new UtilityTools();
+
+		try {
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName));
+			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getTileImage() {
+
+		for (int i = 0; i < fileNames.size(); i++) {
+			String fileName;
+			boolean collision;
+
+			fileName = fileNames.get(i);
+
+			if (collisionStatus.get(i).equals("true")) {
+				collision = true;
+			} else {
+				collision = false;
+			}
+
+			setup(i, fileName, collision);
+
+		}
 	}
 
 	public void loadMap(String filePath) {
@@ -32,7 +99,6 @@ public class TileManager
 
 			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
 				String line = br.readLine();
-
 				while (col < gp.maxWorldCol) {
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
@@ -46,35 +112,13 @@ public class TileManager
 				}
 			}
 			br.close();
-		} catch (Exception e) {
 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-	// dumb
-	/*
-	 * public void loadMap() { try { InputStream is =
-	 * getClass().getResourceAsStream("/maps/worldmap.csv"); BufferedReader br = new
-	 * BufferedReader(new InputStreamReader(is));
-	 * 
-	 * int col = 0; int row = 0;
-	 * 
-	 * String line; while ((line = br.readLine()) != null && row < gp.maxScreenRow)
-	 * { String[] numbers = line.split(","); col = 0; // Reset col for each row
-	 * 
-	 * for (String number : numbers) { int num = Integer.parseInt(number.trim());
-	 * mapTileNum[col][row] = num; col++;
-	 * 
-	 * if (col >= gp.maxScreenCol) { break; // Break if we have reached the maximum
-	 * number of columns } }
-	 * 
-	 * row++; }
-	 * 
-	 * br.close(); } catch (Exception e) { e.printStackTrace(); // Handle exceptions
-	 * more gracefully in your actual application } }
-	 */
 
 	public void draw(Graphics2D g2) {
-		// g2.drawImage(tile[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
 
 		int worldCol = 0;
 		int worldRow = 0;
@@ -92,7 +136,8 @@ public class TileManager
 					&& worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
 					&& worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
 					&& worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+
 			}
 
 			worldCol++;
@@ -103,4 +148,5 @@ public class TileManager
 			}
 		}
 	}
+	
 }

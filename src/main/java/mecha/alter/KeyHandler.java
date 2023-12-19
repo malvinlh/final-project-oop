@@ -3,9 +3,19 @@ package mecha.alter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import mecha.alter.GamePanel.GAMESTATE;
+
 public class KeyHandler implements KeyListener {
 
+	GamePanel gp;
+
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
+
+	boolean drawTimeInfo = false;
+
+	public KeyHandler(GamePanel gp) {
+		this.gp = gp;
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -32,6 +42,35 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_D) {
 			rightPressed = true;
 		}
+		if (code == KeyEvent.VK_P) 
+		{
+			if (GamePanel.state == GAMESTATE.GAME) 
+			{
+				GamePanel.state = GAMESTATE.PAUSED;
+			} 
+			else if (GamePanel.state == GAMESTATE.PAUSED) 
+			{
+				GamePanel.state = GAMESTATE.GAME;
+			}
+		}
+		
+		if(code == KeyEvent.VK_ESCAPE)
+		{
+			if (GamePanel.state == GAMESTATE.PAUSED)
+			{
+				GamePanel.state = GAMESTATE.GAME;
+			}
+		}
+		
+		//if(code)
+
+		if (code == KeyEvent.VK_I) {
+			if (!drawTimeInfo) {
+				drawTimeInfo = true;
+			} else if (drawTimeInfo) {
+				drawTimeInfo = false;
+			}
+		}
 
 	}
 
@@ -54,7 +93,5 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_D) {
 			rightPressed = false;
 		}
-
 	}
-
 }
