@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Thread gameThread;
 	public Player player = new Player(this, keyH);
 	MainMenu mainMenu = new MainMenu(this);
-	SoundManager gManager = new SoundManager();
+	SoundManager sManager = new SoundManager();
 	public Entity monster[] = new Entity[20];
 	ArrayList<Entity> entityList = new ArrayList<>();
 	BattleScene battleScene = new BattleScene(this, mainMenu);
@@ -111,9 +111,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 		if (state == GAMESTATE.GAME) {
-			if (!gManager.isMusicPlaying()) {
-				gManager.setSounds(2, true);
-				gManager.playSounds();
+			if (!sManager.isMusicPlaying()) {
+				sManager.setSounds(2, true);
+				sManager.playSounds();
 			}
 			player.update();
 

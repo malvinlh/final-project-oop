@@ -62,8 +62,6 @@ public class KeyHandler implements KeyListener {
 			}
 		}
 		
-		//if(code)
-
 		if (code == KeyEvent.VK_I) {
 			if (!drawTimeInfo) {
 				drawTimeInfo = true;

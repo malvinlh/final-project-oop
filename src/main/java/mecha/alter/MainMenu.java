@@ -16,7 +16,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 public class MainMenu implements MouseListener {
-    private SoundManager gameManager;
+    private SoundManager soundManager;
     private GamePanel gamePanel;
     private MainMenuEncyclopedia mmEn;
     private MainMenuCredits mmCr;
@@ -37,7 +37,7 @@ public class MainMenu implements MouseListener {
         gamePanel.addMouseListener(this);
         mmEn = new MainMenuEncyclopedia(gamePanel, this);
         mmCr = new MainMenuCredits(gamePanel, this);
-        gameManager = new SoundManager();
+        soundManager = new SoundManager();
         storyModeButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
         encyclopediaButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
         creditsButton = new RoundRectangle2D.Double(0, 0, 340, 75, 20, 20);
@@ -140,18 +140,18 @@ public class MainMenu implements MouseListener {
     }
 
     public void playMusic(int i) {
-        gameManager.setSounds(i, true);
-        gameManager.playSounds();
+        soundManager.setSounds(i, true);
+        soundManager.playSounds();
     }
 
     public void playSE(int i) {
-        gameManager.setSounds(i, false);
-        gameManager.playSounds();
+        soundManager.setSounds(i, false);
+        soundManager.playSounds();
     }
 
     public void stopMusic() {
         System.out.println("Stop Music");
-        gameManager.stopMusic();
+        soundManager.stopMusic();
     }
 
     @Override

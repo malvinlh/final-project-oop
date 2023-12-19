@@ -311,7 +311,6 @@ public class Player extends Entity {
     }
     
     public void updateBattleAnimationFrame() {
-        // Update the frame only if enough time has passed
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastFrame > frameDelay) {
             currentFrameIndex = (currentFrameIndex + 1) % playerIdle.size();
@@ -324,14 +323,12 @@ public class Player extends Entity {
         if (!playerIdle.isEmpty()) {
             BufferedImage currentFrame = playerIdle.get(currentFrameIndex);
             
-            // Adjust the scale factor based on your desired size
-            double scaleX = 5.0; // Example: Increase width by a factor of 2
-            double scaleY = 5.0; // Example: Increase height by a factor of 2
+            double scaleX = 5.0;
+            double scaleY = 5.0;
 
             int scaledWidth = (int) (currentFrame.getWidth() * scaleX);
             int scaledHeight = (int) (currentFrame.getHeight() * scaleY);
 
-            // Draw the scaled image
             g.drawImage(currentFrame, 250, 400, scaledWidth, scaledHeight, null);
         }
     }
@@ -342,14 +339,12 @@ public class Player extends Entity {
         {
             BufferedImage currentFrame = playerAttack.get(currentFrameIndex);
             
-            // Adjust the scale factor based on your desired size
-            double scaleX = 5.0; // Example: Increase width by a factor of 2
-            double scaleY = 5.0; // Example: Increase height by a factor of 2
+            double scaleX = 5.0;
+            double scaleY = 5.0; 
 
             int scaledWidth = (int) (currentFrame.getWidth() * scaleX);
             int scaledHeight = (int) (currentFrame.getHeight() * scaleY);
 
-            // Draw the scaled image
             g.drawImage(currentFrame, 250, 400, scaledWidth, scaledHeight, null);
         }
         else if(!playerAttack.isEmpty() && attackType == "summon")
@@ -357,14 +352,12 @@ public class Player extends Entity {
         	BufferedImage currentFrameGM = playerGMIdle.get(currentFrameIndex);
         	BufferedImage currentFramePlayer = playerIdle.get(currentFrameIndex);
             
-            // Adjust the scale factor based on your desired size
             double scaleXPlayer = 5.0;
             double scaleYPlayer = 5.0;
 
             int scaledWidthPlayer = (int) (currentFramePlayer.getWidth() * scaleXPlayer);
             int scaledHeightPlayer = (int) (currentFramePlayer.getHeight() * scaleYPlayer);
 
-            // Draw the scaled image
             g.drawImage(currentFrameGM, 400, 200,  null);
             g.drawImage(currentFramePlayer, 250, 400, scaledWidthPlayer, scaledHeightPlayer, null);
         }
