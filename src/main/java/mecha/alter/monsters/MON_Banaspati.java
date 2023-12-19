@@ -67,11 +67,11 @@ public class MON_Banaspati extends Entity
         }
 
         // Load each attack PNG frame
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= 14; i++)
         {
         	try
         	{
-                String fileNameAttack = "/monsters/banaspati/idle/idle" + i + ".png";
+                String fileNameAttack = "/monsters/banaspati/attack/attack" + i + ".png";
                 BufferedImage frameAttack = ImageIO.read(getClass().getResourceAsStream(fileNameAttack));
                 banaspatiAttack.add(frameAttack);
         	}

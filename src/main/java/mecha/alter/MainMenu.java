@@ -22,7 +22,7 @@ public class MainMenu implements MouseListener {
     private MainMenuCredits mmCr;
     private BufferedImage backgroundImage;
     public RoundRectangle2D.Double storyModeButton, encyclopediaButton, creditsButton;
-    private int buttonSpacing = 40;
+    private int buttonSpacing = 70;
 
     Font imprisha;
 
